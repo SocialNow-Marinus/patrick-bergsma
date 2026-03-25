@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: "Cormorant", Georgia, serif;
+  --font-body: "Outfit", system-ui, sans-serif;
+
+  /* Colors — warm gallery whites with deep charcoal */
+  --color-gallery-white: #FAFAF8;
+  --color-gallery-warm: #F5F4F0;
+  --color-gallery-cream: #EDECE6;
+  --color-charcoal: #1A1A1A;
+  --color-charcoal-light: #2D2D2D;
+  --color-stone: #8A8680;
+  --color-stone-light: #B5B0A8;
+  --color-accent: #C4A86C;
+  --color-accent-dark: #A68B4B;
+
+  /* Spacing scale */
+  --spacing-section: 6rem;
+  --spacing-section-lg: 8rem;
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease both;
+  --animate-slide-in: slide-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-gallery-white);
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Display typography */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Elegant selection */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gallery-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone);
+}
+
+/* Image reveal animation utility */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for grid items */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.3s; }
+
+/* Page transition */
+.page-enter {
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Lightbox backdrop blur */
+.lightbox-backdrop {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Smooth link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Smooth image hover zoom */
+.artwork-hover {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.6s ease;
+}
+
+.artwork-hover:hover {
+  transform: scale(1.03);
+}
+
+/* Horizontal divider grow animation */
+.divider-grow {
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.divider-grow.revealed {
+  width: 100%;
+}
+
+/* Floating scroll indicator */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* Instagram link hover glow */
+.instagram-glow {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.instagram-glow:hover {
+  filter: drop-shadow(0 0 8px rgba(220, 39, 67, 0.35));
+  transform: scale(1.1);
+}
+
+/* Subtle parallax text shadow on hero */
+.hero-text-shadow {
+  text-shadow: 0 2px 60px rgba(0, 0, 0, 0.04);
+}
+
+/* Footer link hover slide */
+.footer-link {
+  position: relative;
+  transition: padding-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-link:hover {
+  padding-left: 8px;
+}
+
+/* Glassmorphism card utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Smooth cursor for interactive elements */
+button, a, [role="button"] {
+  cursor: pointer;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+
+  .artwork-hover:hover {
+    transform: none;
+  }
+
+  .animate-float {
+    animation: none;
+  }
+}
